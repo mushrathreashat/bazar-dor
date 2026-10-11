@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 150px; }
+body { margin: 0; background: #fbfcf8; color: #17251d; font-family: Arial, "Noto Sans Bengali", sans-serif; }
+a { text-decoration: none; }
+button, input, select { font: inherit; }
+.btn-primary { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; background:#16784b; padding:10px 18px; color:white; font-weight:700; transition:.2s; }
+.btn-primary:hover { background:#105d39; }
+.btn-outline { border:1px solid #d6ddd5; border-radius:999px; padding:9px 15px; font-size:14px; font-weight:700; }
+.product-card { display:flex; min-height:235px; flex-direction:column; border:1px solid #e8ebe3; border-radius:22px; background:white; padding:20px; transition:transform .2s, box-shadow .2s, border-color .2s; }
+.product-card:hover { transform:translateY(-3px); border-color:#c9dfcf; box-shadow:0 14px 34px #173e2010; }
+.ticker-wrap { overflow:hidden; white-space:nowrap; }
+.ticker-track { display:inline-flex; min-width:max-content; animation: ticker 48s linear infinite; }
+.ticker-wrap:hover .ticker-track { animation-play-state:paused; }
+@keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+.skeleton { border-radius:14px; background:linear-gradient(90deg,#ecefe7 25%,#f8f9f5 50%,#ecefe7 75%); background-size:200% 100%; animation:shine 1.3s infinite; }
+@keyframes shine { to { background-position:-200% 0; } }
+.scrollbar-hide { scrollbar-width:none; }
+.scrollbar-hide::-webkit-scrollbar { display:none; }

@@ -1,0 +1,11 @@
+"use client";
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
+export default function SignUpPage(){
+ const router=useRouter();const [name,setName]=useState("");const [email,setEmail]=useState("");const [password,setPassword]=useState("");const [busy,setBusy]=useState(false);
+ async function submit(e:React.FormEvent){e.preventDefault();setBusy(true);try{const r=await authClient.signUp.email({name,email,password});if(r.error){toast.error(r.error.message||"অ্যাকাউন্ট তৈরি হয়নি");return;}toast.success("অ্যাকাউন্ট তৈরি হয়েছে। এখন সাইন ইন করুন।");router.push("/signin");}catch{toast.error("সাইন আপ করা যায়নি। আবার চেষ্টা করুন।");}finally{setBusy(false);}}
+ return <main className="mx-auto flex min-h-[70vh] max-w-md items-center px-4 py-12"><div className="w-full rounded-3xl border border-stone-100 bg-white p-6 shadow-sm sm:p-8"><div className="text-center"><div className="text-4xl">🥬</div><h1 className="mt-3 text-3xl font-black">নতুন অ্যাকাউন্ট</h1><p className="mt-2 text-sm text-stone-500">বাজারদর জানতে আজই যোগ দিন।</p></div><form onSubmit={submit} className="mt-7 space-y-4"><label className="block text-sm font-bold">আপনার নাম<input required value={name} onChange={e=>setName(e.target.value)} className="mt-2 w-full rounded-xl border border-stone-200 px-4 py-3 outline-none focus:border-market" placeholder="আপনার নাম"/></label><label className="block text-sm font-bold">ইমেইল<input required type="email" value={email} onChange={e=>setEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-stone-200 px-4 py-3 outline-none focus:border-market" placeholder="name@example.com"/></label><label className="block text-sm font-bold">পাসওয়ার্ড<input required minLength={8} type="password" value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-stone-200 px-4 py-3 outline-none focus:border-market" placeholder="কমপক্ষে ৮ অক্ষর"/></label><button disabled={busy} className="btn-primary w-full disabled:opacity-60">{busy?"অ্যাকাউন্ট তৈরি হচ্ছে…":"সাইন আপ"}</button></form><p className="mt-6 text-center text-sm text-stone-500">আগে থেকেই অ্যাকাউন্ট আছে? <Link href="/signin" className="font-bold text-market">সাইন ইন করুন</Link></p></div></main>;
+}
